@@ -26,7 +26,7 @@ class UploadWorker(
 
         return try {
             val requestFile = file.asRequestBody("audio/mp4".toMediaTypeOrNull())
-            val body = MultipartBody.Part.createFormData("audio", file.name, requestFile)
+            val body = MultipartBody.Part.createFormData("file", file.name, requestFile)
 
             val response = api.uploadAudio(body)
 
@@ -36,7 +36,7 @@ class UploadWorker(
             } else {
                 Result.retry()
             }
-        } catch (e: Exception) {
+        } catch (ignored: Exception) {
             Result.retry()
         }
     }

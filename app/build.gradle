@@ -8,12 +8,25 @@ android {
     namespace 'com.example.wearos_audio_sensor'
     compileSdk 37
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     defaultConfig {
         applicationId "com.example.wearos_audio_sensor"
         minSdk 30
         targetSdk 37
         versionCode 1
         versionName "1.0"
+
+        def properties = new Properties()
+        def propertiesFile = project.rootProject.file('local.properties')
+        if (propertiesFile.exists()) {
+            properties.load(propertiesFile.newDataInputStream())
+        }
+        buildConfigField "String", "INGESTION_USER", "\"${properties.getProperty('ingestion.user') ?: 'admin'}\""
+        buildConfigField "String", "INGESTION_PASSWORD", "\"${properties.getProperty('ingestion.password') ?: 'secret'}\""
+        buildConfigField "String", "INGESTION_URL", "\"https://ingestion.tailc4cbaa.ts.net/\""
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

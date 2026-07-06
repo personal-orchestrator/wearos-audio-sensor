@@ -15,7 +15,9 @@ class AudioSyncRepository(private val context: Context) {
     }
 
     fun createNewFile(): File {
-        return File(getOutputDirectory(), "rec_${System.currentTimeMillis()}.m4a")
+        val timestamp = System.currentTimeMillis()
+        val uuid = UUID.randomUUID().toString()
+        return File(getOutputDirectory(), "rec_${timestamp}_$uuid.m4a")
     }
 
     fun scheduleUpload(file: File) {
