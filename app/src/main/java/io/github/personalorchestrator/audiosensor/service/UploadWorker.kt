@@ -1,9 +1,9 @@
-package com.example.wearos_audio_sensor.service
+package io.github.personalorchestrator.audiosensor.service
 
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import com.example.wearos_audio_sensor.data.source.AudioApi
+import io.github.personalorchestrator.audiosensor.data.source.AudioApi
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -13,7 +13,7 @@ import java.io.File
 
 class UploadWorker(
     appContext: Context,
-    params: WorkerParameters
+    params: WorkerParameters,
 ) : CoroutineWorker(appContext, params), KoinComponent {
 
     private val api: AudioApi by inject()
@@ -36,7 +36,7 @@ class UploadWorker(
             } else {
                 Result.retry()
             }
-        } catch (ignored: Exception) {
+        } catch (_: Exception) {
             Result.retry()
         }
     }

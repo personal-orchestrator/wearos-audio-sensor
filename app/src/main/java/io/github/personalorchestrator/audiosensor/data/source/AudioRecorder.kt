@@ -1,4 +1,4 @@
-package com.example.wearos_audio_sensor.data.source
+package io.github.personalorchestrator.audiosensor.data.source
 
 import android.content.Context
 import android.media.MediaRecorder
@@ -8,6 +8,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileOutputStream
+import kotlin.time.Duration.Companion.milliseconds
 
 class AudioRecorder(private val context: Context) {
     private var mediaRecorder: MediaRecorder? = null
@@ -34,7 +35,7 @@ class AudioRecorder(private val context: Context) {
 
     suspend fun stop() = withContext(Dispatchers.IO) {
         // 500ms delay to prevent truncation of the last words in AAC
-        delay(500)
+        delay(500.milliseconds)
         mediaRecorder?.apply {
             stop()
             reset()

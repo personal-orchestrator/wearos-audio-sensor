@@ -1,9 +1,9 @@
-package com.example.wearos_audio_sensor.ui.viewmodel
+package io.github.personalorchestrator.audiosensor.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.wearos_audio_sensor.data.repository.AudioSyncRepository
-import com.example.wearos_audio_sensor.data.source.AudioRecorder
+import io.github.personalorchestrator.audiosensor.data.repository.AudioSyncRepository
+import io.github.personalorchestrator.audiosensor.data.source.AudioRecorder
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -15,7 +15,7 @@ enum class RecordingState {
 
 class RecordViewModel(
     private val audioRecorder: AudioRecorder,
-    private val repository: AudioSyncRepository
+    private val repository: AudioSyncRepository,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(RecordingState.IDLE)
@@ -39,7 +39,7 @@ class RecordViewModel(
         _uiState.value = RecordingState.RECORDING
         try {
             audioRecorder.start(file)
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             _uiState.value = RecordingState.IDLE
         }
     }

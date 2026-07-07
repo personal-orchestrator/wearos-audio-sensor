@@ -1,11 +1,11 @@
-package com.example.wearos_audio_sensor
+package io.github.personalorchestrator.audiosensor
 
 import android.content.Context
 import androidx.work.ListenableWorker
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
-import com.example.wearos_audio_sensor.data.source.AudioApi
-import com.example.wearos_audio_sensor.service.UploadWorker
+import io.github.personalorchestrator.audiosensor.data.source.AudioApi
+import io.github.personalorchestrator.audiosensor.service.UploadWorker
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
@@ -29,9 +29,11 @@ class UploadWorkerTest {
     @Before
     fun setup() {
         startKoin {
-            modules(module {
-                single { api }
-            })
+            modules(
+                module {
+                    single { api }
+                },
+            )
         }
     }
 

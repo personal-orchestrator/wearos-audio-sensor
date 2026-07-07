@@ -1,8 +1,8 @@
-package com.example.wearos_audio_sensor.data.repository
+package io.github.personalorchestrator.audiosensor.data.repository
 
 import android.content.Context
 import androidx.work.*
-import com.example.wearos_audio_sensor.service.UploadWorker
+import io.github.personalorchestrator.audiosensor.service.UploadWorker
 import java.io.File
 import java.util.UUID
 
@@ -26,12 +26,12 @@ class AudioSyncRepository(private val context: Context) {
             .setConstraints(
                 Constraints.Builder()
                     .setRequiredNetworkType(NetworkType.CONNECTED)
-                    .build()
+                    .build(),
             )
             .setBackoffCriteria(
                 BackoffPolicy.EXPONENTIAL,
                 WorkRequest.MIN_BACKOFF_MILLIS,
-                java.util.concurrent.TimeUnit.MILLISECONDS
+                java.util.concurrent.TimeUnit.MILLISECONDS,
             )
             .build()
 

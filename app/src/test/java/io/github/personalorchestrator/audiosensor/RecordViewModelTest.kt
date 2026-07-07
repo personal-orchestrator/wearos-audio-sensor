@@ -1,9 +1,9 @@
-package com.example.wearos_audio_sensor
+package io.github.personalorchestrator.audiosensor
 
-import com.example.wearos_audio_sensor.data.repository.AudioSyncRepository
-import com.example.wearos_audio_sensor.data.source.AudioRecorder
-import com.example.wearos_audio_sensor.ui.viewmodel.RecordingState
-import com.example.wearos_audio_sensor.ui.viewmodel.RecordViewModel
+import io.github.personalorchestrator.audiosensor.data.repository.AudioSyncRepository
+import io.github.personalorchestrator.audiosensor.data.source.AudioRecorder
+import io.github.personalorchestrator.audiosensor.ui.viewmodel.RecordingState
+import io.github.personalorchestrator.audiosensor.ui.viewmodel.RecordViewModel
 import io.mockk.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

@@ -1,7 +1,7 @@
-package com.example.wearos_audio_sensor
+package io.github.personalorchestrator.audiosensor
 
 import android.content.Context
-import com.example.wearos_audio_sensor.data.repository.AudioSyncRepository
+import io.github.personalorchestrator.audiosensor.data.repository.AudioSyncRepository
 import io.mockk.every
 import io.mockk.mockk
 import org.junit.Assert.assertTrue
@@ -39,7 +39,7 @@ class AudioSyncRepositoryTest {
         val file = File("test.m4a")
         try {
             repository.scheduleUpload(file)
-        } catch (ignored: Exception) {
+        } catch (_: Exception) {
             // Ignore WorkManager initialization errors in unit tests
         }
     }

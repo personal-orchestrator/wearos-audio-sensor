@@ -1,8 +1,8 @@
-package com.example.wearos_audio_sensor
+package io.github.personalorchestrator.audiosensor
 
 import android.app.Application
 import androidx.work.Configuration
-import com.example.wearos_audio_sensor.di.appModule
+import io.github.personalorchestrator.audiosensor.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.workmanager.factory.KoinWorkerFactory

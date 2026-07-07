@@ -1,4 +1,4 @@
-package com.example.wearos_audio_sensor.ui.screen
+package io.github.personalorchestrator.audiosensor.ui.screen
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -13,23 +13,23 @@ import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.TimeText
-import com.example.wearos_audio_sensor.R
-import com.example.wearos_audio_sensor.ui.viewmodel.RecordingState
-import com.example.wearos_audio_sensor.ui.viewmodel.RecordViewModel
+import io.github.personalorchestrator.audiosensor.R
+import io.github.personalorchestrator.audiosensor.ui.viewmodel.RecordingState
+import io.github.personalorchestrator.audiosensor.ui.viewmodel.RecordViewModel
 
 @Composable
 fun MainRecordScreen(viewModel: RecordViewModel) {
     val uiState by viewModel.uiState.collectAsState()
 
     Scaffold(
-        timeText = { TimeText() }
+        timeText = { TimeText() },
     ) {
         Button(
             onClick = { viewModel.toggleRecording() },
             modifier = Modifier
                 .fillMaxSize()
                 .padding(24.dp),
-            enabled = uiState != RecordingState.SYNCING
+            enabled = uiState != RecordingState.SYNCING,
         ) {
             val text = when (uiState) {
                 RecordingState.IDLE -> stringResource(R.string.record)
