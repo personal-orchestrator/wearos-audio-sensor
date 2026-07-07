@@ -3,9 +3,11 @@ package io.github.personalorchestrator.audiosensor.ui.screen
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material.Button
@@ -20,6 +22,17 @@ import io.github.personalorchestrator.audiosensor.ui.viewmodel.RecordViewModel
 @Composable
 fun MainRecordScreen(viewModel: RecordViewModel) {
     val uiState by viewModel.uiState.collectAsState()
+
+    val view = LocalView.current
+    DisposableEffect(uiState) {
+        val isRecording = uiState == RecordingState.RECORDING
+        if (isRecording) {
+            view.keepScreenOn = true
+        }
+        onDispose {
+            view.keepScreenOn = false
+        }
+    }
 
     Scaffold(
         timeText = { TimeText() },
