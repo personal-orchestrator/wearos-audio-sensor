@@ -1,0 +1,92 @@
+plugins {
+    alias libs.plugins.android.application
+    alias libs.plugins.jetbrains.kotlin.android
+    id 'org.jetbrains.kotlin.plugin.compose'
+}
+
+android {
+    namespace 'io.github.personalorchestrator.audiosensor'
+    compileSdk 37
+
+    buildFeatures {
+        buildConfig = true
+    }
+
+    defaultConfig {
+        applicationId "io.github.personalorchestrator.audiosensor"
+        minSdk 30
+        targetSdk 37
+        versionCode 1
+        versionName "1.0"
+
+        def properties = new Properties()
+        def propertiesFile = project.rootProject.file('local.properties')
+        if (propertiesFile.exists()) {
+            properties.load(propertiesFile.newDataInputStream())
+        }
+        buildConfigField "String", "INGESTION_USER", "\"${properties.getProperty('ingestion.user') ?: 'admin'}\""
+        buildConfigField "String", "INGESTION_PASSWORD", "\"${properties.getProperty('ingestion.password') ?: 'secret'}\""
+        buildConfigField "String", "INGESTION_URL", "\"https://ingestion.tailc4cbaa.ts.net/\""
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+}
+
+dependencies {
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.percentlayout
+    implementation libs.androidx.legacy.support.v4
+    implementation libs.androidx.recyclerview
+    
+    // Compose
+    implementation libs.androidx.compose.ui
+    implementation libs.androidx.compose.material
+    implementation libs.androidx.compose.foundation
+    implementation libs.androidx.compose.ui.tooling.preview
+    implementation libs.androidx.activity.compose
+    
+    // WorkManager
+    implementation libs.androidx.work.runtime.ktx
+    
+    // Retrofit & OkHttp
+    implementation libs.retrofit
+    implementation libs.converter.gson
+    implementation libs.logging.interceptor
+    
+    // Koin
+    implementation libs.koin.android
+    implementation libs.koin.androidx.compose
+    implementation libs.koin.androidx.workmanager
+
+    // Testing
+    testImplementation libs.junit
+    testImplementation libs.mockk
+    testImplementation libs.kotlinx.coroutines.test
+    androidTestImplementation libs.androidx.junit
+    androidTestImplementation libs.androidx.espresso.core
+    androidTestImplementation libs.androidx.compose.ui.test.junit4
+    debugImplementation libs.androidx.compose.ui.tooling
+    debugImplementation libs.androidx.compose.ui.test.manifest
+}

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Audio Sensor</string>
+    <string name="record">Record</string>
+    <string name="stop">Stop</string>
+    <string name="syncing">Syncing…</string>
+    <string name="ready">Ready</string>
+</resources>
