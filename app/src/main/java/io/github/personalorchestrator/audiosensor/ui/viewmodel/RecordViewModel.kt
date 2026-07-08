@@ -48,7 +48,7 @@ class RecordViewModel(
         _uiState.value = RecordingState.SYNCING
         try {
             audioRecorder.stop()
-            currentFile?.let { repository.scheduleUpload(it) }
+            repository.scheduleUpload()
         } finally {
             _uiState.value = RecordingState.IDLE
             currentFile = null

@@ -20,9 +20,8 @@ class AudioSyncRepository(private val context: Context) {
         return File(getOutputDirectory(), "rec_${timestamp}_$uuid.m4a")
     }
 
-    fun scheduleUpload(file: File) {
+    fun scheduleUpload() {
         val uploadRequest = OneTimeWorkRequestBuilder<UploadWorker>()
-            .setInputData(workDataOf("file_path" to file.absolutePath))
             .setConstraints(
                 Constraints.Builder()
                     .setRequiredNetworkType(NetworkType.CONNECTED)
@@ -36,7 +35,7 @@ class AudioSyncRepository(private val context: Context) {
             .build()
 
         WorkManager.getInstance(context).enqueueUniqueWork(
-            file.name,
+            "AUDIO_SYNC_WORK",
             ExistingWorkPolicy.REPLACE,
             uploadRequest
         )
