@@ -36,9 +36,8 @@ class AudioSyncRepositoryTest {
         // Instead, we just verify the repository method runs without crashing, 
         // acknowledging that full WorkManager testing usually requires AndroidTest.
         
-        val file = File("test.m4a")
         try {
-            repository.scheduleUpload(file)
+            repository.scheduleUpload()
         } catch (_: Exception) {
             // Ignore WorkManager initialization errors in unit tests
         }

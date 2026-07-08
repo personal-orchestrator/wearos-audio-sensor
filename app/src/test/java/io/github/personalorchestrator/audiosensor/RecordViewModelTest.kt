@@ -56,7 +56,7 @@ class RecordViewModelTest {
         viewModel.toggleRecording()
 
         coVerify { audioRecorder.stop() }
-        verify { repository.scheduleUpload(file) }
+        verify { repository.scheduleUpload() }
         assertEquals(RecordingState.IDLE, viewModel.uiState.value)
     }
 }
